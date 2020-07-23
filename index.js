@@ -168,31 +168,37 @@ class Instructor extends Lambdasian {
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
 class Student extends Lambdasian{
-    constructor (attrs) {
-      super (attrs);
-      this.previousBackground = attrs.previousBackground;
-      this.className = attrs.className;
-      this.favSubjects = attrs.favSubjects;
-      this.grade = 86;
-    }
-    listSubjects () {
-      return `Loving ${this.favSubjects[0]}, ${this.favSubjects[1]}, ${this.favSubjects[2]}!`
-    }
-    PRAssignment (subject) {
-      return `${this.name} has submitted a PR for ${subject}`
-    }
-    sprintChallenge (subject) {
-      return `${this.name} has begun sprint challenge on ${subject}`
-    }
-    graduate (instructorOrPM) {
-      instructorOrPM.willUnexpectedlyAdjustGrade(this.student);
+  constructor (attrs) {
+    super (attrs);
+    this.previousBackground = attrs.previousBackground;
+    this.className = attrs.className;
+    this.favSubjects = attrs.favSubjects;
+    this.grade = 86;
+  }
+  listSubjects () {
+    return `Loving ${this.favSubjects[0]}, ${this.favSubjects[1]}, ${this.favSubjects[2]}!`
+  }
+  PRAssignment (subject) {
+    return `${this.name} has submitted a PR for ${subject}`
+  }
+  sprintChallenge (subject) {
+    return `${this.name} has begun sprint challenge on ${subject}`
+  }
+  graduate (instructorOrPM) {
+    let attempt = 0;
+    instructorOrPM.willUnexpectedlyAdjustGrade(this.student);
+    if (attempt < 100) {
       if (this.grade < 70) {
-        console.log(`Better luck next time!`);
+        console.log(`You only had a ${student.grade}%. Better luck next time!`);
+        attempt = attempt++;
         instructorOrPM.willUnexpectedlyAdjustGrade(this.student);
       } else {
         return `Congrats! You studied hard & the Mighty-Random-Maths-That-Be approve of your graduation! Here's a cookie. Next in line, please!`
       }
+    } else {
+      return `You've tried 100 times already. Maybe coding just isn't for you. Have you looked into world domination & overthrowing the Mighty-Random-Maths-That-Be's? Here's a cookie. Next in line, please!`
     }
+  }
 }
 
 /*
